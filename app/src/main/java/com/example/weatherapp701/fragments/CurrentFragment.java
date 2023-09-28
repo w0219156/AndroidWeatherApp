@@ -47,6 +47,16 @@ public class CurrentFragment extends Fragment {
 
             // Use Glide to load image from API
             Glide.with(view).load(weatherUrl).into(imageViewIcon);
+
+            // Display the Feels Like
+            TextView textViewFeelsLike = view.findViewById(R.id.textViewFeelsLike);
+            String feelsLike = "Feel like " + Math.round(weather.getCurrent().getFeelsLike()) + "°C";
+            textViewFeelsLike.setText(feelsLike);
+
+            // Wind speed and direction
+            String wind = "Wind: " + weather.getCurrent().getWindDirection() + " " + Math.round(weather.getCurrent().getWindSpeed()) + " kph";
+            TextView textViewWind = view.findViewById(R.id.textViewCurrentWind);
+            textViewWind.setText(wind);
         }
 
         // Inflate the layout for this fragment
