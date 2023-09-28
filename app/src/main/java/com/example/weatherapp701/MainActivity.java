@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.weatherapp701.databinding.ActivityMainBinding;
 import com.example.weatherapp701.models.Weather;
 import com.google.gson.Gson;
@@ -48,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
         // Display the weather description
         TextView textViewDescription = binding.textViewDescription;
         textViewDescription.setText(weather.getCurrent().getCondition().getText());
+
+        // Display the current weather icon
+        ImageView imageViewIcon = binding.imageViewIcon;
+        String weatherUrl = weather.getCurrent().getCondition().getIcon();
+        weatherUrl = "https:" + weatherUrl.replace("64x64","128x128");
+
+        // Use Glide to load image from API
+        Glide.with(view).load(weatherUrl).into(imageViewIcon);
     }
 
     private String getJsonFromFile() {
