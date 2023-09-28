@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.weatherapp701.databinding.ActivityMainBinding;
+import com.example.weatherapp701.fragments.CurrentFragment;
+import com.example.weatherapp701.fragments.ForecastFragment;
 import com.example.weatherapp701.models.Weather;
 import com.google.gson.Gson;
 
@@ -22,6 +25,8 @@ import java.util.stream.Collectors;
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
+    CurrentFragment currentFragment;
+    ForecastFragment forecastFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +46,56 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewLocation = binding.textViewLocation;
         textViewLocation.setText(weather.getLocation().getName());
 
-        // Display the current temperature
-        TextView textViewTemperature = binding.textViewTemperature;
-        String temperatureVal = getFloatAsString(weather.getCurrent().getTemperature());
-        String temperatureText = String.valueOf(temperatureVal) + "°C";
-        textViewTemperature.setText(temperatureText);
+        // Initialize fragments
+        currentFragment = new CurrentFragment();
+        forecastFragment = new ForecastFragment();
 
-        // Display the weather description
-        TextView textViewDescription = binding.textViewDescription;
-        textViewDescription.setText(weather.getCurrent().getCondition().getText());
+        //
+        // Load Current Fragment
+        //
 
-        // Display the current weather icon
-        ImageView imageViewIcon = binding.imageViewIcon;
-        String weatherUrl = weather.getCurrent().getCondition().getIcon();
-        weatherUrl = "https:" + weatherUrl.replace("64x64","128x128");
+        // Add weather object to Bundle to pass to fragment
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("weather", weather);
 
-        // Use Glide to load image from API
-        Glide.with(view).load(weatherUrl).into(imageViewIcon);
+        currentFragment.setArguments(bundle);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frameLayout, currentFragment)
+                .commit();
+
+
+        // Button Click Listeners
+        Button btnForecast = binding.buttonForecast;
+        Button btnCurrent = binding.buttonCurrent;
+
+        btnForecast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        btnForecast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, forecastFragment)
+                        .commit();
+            }
+        });
+
+        btnCurrent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frameLayout, currentFragment)
+                        .commit();
+            }
+        });
+
     }
 
     private String getJsonFromFile() {
