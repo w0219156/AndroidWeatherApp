@@ -1,9 +1,11 @@
 package com.example.weatherapp701;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import com.example.weatherapp701.databinding.ActivityMainBinding;
 import com.example.weatherapp701.fragments.CurrentFragment;
 import com.example.weatherapp701.fragments.ForecastFragment;
 import com.example.weatherapp701.models.Weather;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -46,13 +49,48 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewLocation = binding.textViewLocation;
         textViewLocation.setText(weather.getLocation().getName());
 
-        // Initialize fragments
-        currentFragment = new CurrentFragment();
-        forecastFragment = new ForecastFragment();
+        //
+        // Setup bottom navigation
+        //
+
+        NavigationBarView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                // Current fragment selected
+                if(itemId == R.id.navigation_current)
+                {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frameLayout, currentFragment)
+                            .commit();
+
+                    return true;
+                }
+
+                // Forecast fragment selected
+                if(itemId == R.id.navigation_forecast){
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frameLayout, forecastFragment)
+                            .commit();
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
 
         //
-        // Load Current Fragment
+        // Initialize fragments
         //
+
+        currentFragment = new CurrentFragment();
+        forecastFragment = new ForecastFragment();
 
         // Add weather object to Bundle to pass to fragment
         Bundle bundle = new Bundle();
@@ -60,42 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
         currentFragment.setArguments(bundle);
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frameLayout, currentFragment)
-                .commit();
-
-
-        // Button Click Listeners
-        Button btnForecast = binding.buttonForecast;
-        Button btnCurrent = binding.buttonCurrent;
-
-        btnForecast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        btnForecast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frameLayout, forecastFragment)
-                        .commit();
-            }
-        });
-
-        btnCurrent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frameLayout, currentFragment)
-                        .commit();
-            }
-        });
-
+        // Display the currentFragment
+        bottomNavigationView.setSelectedItemId(R.id.navigation_current);
     }
 
     private String getJsonFromFile() {
@@ -115,7 +119,4 @@ public class MainActivity extends AppCompatActivity {
         return json;
     }
 
-    private String getFloatAsString(float num){
-        return BigDecimal.valueOf(num).setScale(0, BigDecimal.ROUND_HALF_UP).toString();
-    }
 }
