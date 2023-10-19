@@ -13,8 +13,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.weatherapp701.R;
 
-import com.example.weatherapp701.models.Current;
-import com.example.weatherapp701.models.Location;
 import com.example.weatherapp701.models.Weather;
 
 public class CurrentFragment extends Fragment {
@@ -37,7 +35,7 @@ public class CurrentFragment extends Fragment {
             textViewTemperature.setText(temperatureText);
 
             // Display the weather description
-            TextView textViewDescription = view.findViewById(R.id.textViewDescription);
+            TextView textViewDescription = view.findViewById(R.id.textViewDescription1);
             textViewDescription.setText(weather.getCurrent().getCondition().getText());
 
             // Display the current weather icon

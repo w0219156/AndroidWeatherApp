@@ -1,26 +1,154 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ForecastFragment">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Location Name -->
+    <TextView
+        android:id="@+id/textViewLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="Location Name"/>
+
+    <!-- Forecast Day 1 -->
+    <LinearLayout
+        android:id="@+id/day1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#2196F3">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_marginTop="16dp">
 
+        <!-- Date for Day 1 -->
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:id="@+id/textViewDate1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Forecast Fragment"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+            android:layout_weight="1"
+            android:text="Date"/>
+
+        <!-- Weather Icon for Day 1 -->
+        <ImageView
+            android:id="@+id/imageViewIconDay1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Temperature Range for Day 1 -->
+        <TextView
+            android:id="@+id/textViewTempRangeDay1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Temp Range"/>
+
+        <!-- Weather Description for Day 1 -->
+        <TextView
+            android:id="@+id/textViewDescriptionDay1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Description"/>
+
+    </LinearLayout>
+
+    <!-- Forecast Day 2 -->
+    <!-- Forecast Day 1 -->
+    <LinearLayout
+        android:id="@+id/day2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        tools:ignore="DuplicateIds">
+
+        <!-- Date for Day 1 -->
+        <TextView
+            android:id="@+id/textViewDateday2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Date"
+            tools:ignore="DuplicateIds" />
+
+        <!-- Weather Icon for Day 1 -->
+        <ImageView
+            android:id="@+id/imageViewIconday2"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            tools:ignore="DuplicateIds" />
+
+        <!-- Temperature Range for Day 1 -->
+        <TextView
+            android:id="@+id/textViewTempRange2day2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Temp Range"
+            tools:ignore="DuplicateIds" />
+
+        <!-- Weather Description for Day 1 -->
+        <TextView
+            android:id="@+id/textViewDescriptionday2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Description"
+            tools:ignore="DuplicateIds" />
+
+    </LinearLayout>
+
+    <!-- Forecast Day 3 -->
+    <!-- ... Similar structure as Day 1 ... -->
+    <!-- Forecast Day 1 -->
+    <LinearLayout
+        android:id="@+id/day3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        tools:ignore="DuplicateIds">
+
+        <!-- Date for Day 1 -->
+        <TextView
+            android:id="@+id/textViewDateday3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Date"/>
+
+        <!-- Weather Icon for Day 1 -->
+        <ImageView
+            android:id="@+id/imageViewIconday3"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"/>
+
+        <!-- Temperature Range for Day 1 -->
+        <TextView
+            android:id="@+id/textViewTempRangeday3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Temp Range"/>
+
+        <!-- Weather Description for Day 1 -->
+        <TextView
+            android:id="@+id/textViewDescriptionday3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Description"/>
+
+    </LinearLayout>
+
+</LinearLayout>

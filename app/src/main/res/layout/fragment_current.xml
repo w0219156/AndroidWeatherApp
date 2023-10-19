@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewDescription"
+            android:id="@+id/textViewDescription1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -39,7 +39,7 @@
             android:id="@+id/imageViewIcon"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
+            app:layout_constraintBottom_toTopOf="@+id/textViewDescription1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_action_sun" />
